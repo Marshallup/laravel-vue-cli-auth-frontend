@@ -58,11 +58,25 @@
 }
 </style>
 <script>
+import axios from 'axios';
 import Nav from './components/Nav.vue';
 
 export default {
   components: {
     Nav,
+  },
+  async mounted() {
+    // const data = JSON.stringify(this.data);
+    const url = 'http://127.0.0.1:8000/api/user';
+    const response = await axios.get(url, {
+      withCredentials: true,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log(response.data, 'check');
   },
 };
 

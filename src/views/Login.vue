@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Login',
   data() {
@@ -36,17 +38,28 @@ export default {
   methods: {
     async submit() {
       const data = JSON.stringify(this.data);
-      console.log(data);
-      const res = await fetch('http://127.0.0.1:8000/api/login', {
-        method: 'POST',
+      const url = 'http://127.0.0.1:8000/api/login';
+      const response = await axios.post(url, data, {
+        withCredentials: true,
         headers: {
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        // credentials: 'include',
-        body: data,
       });
 
-      console.log(await res.json());
+      console.log(response.data);
+      // const data = JSON.stringify(this.data);
+      // console.log(data);
+      // const res = await fetch('http://127.0.0.1:8000/api/login', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   credentials: 'include',
+      //   body: data,
+      // });
+      //
+      // console.log(await res.json());
       // await this.$router.push('/');
     },
   },
